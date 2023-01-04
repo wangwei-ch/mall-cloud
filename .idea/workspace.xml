@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="42d7a9ac-2824-493f-af78-03d36b3a1f19" name="Changes" comment="测试提交" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="AnnotationType" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="f47248734a976a80d8860bcb155fc31e049d62cf" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/mallsystem-gateway/src/main/java/com/wangwei/mall/gateway" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="/usr/local/develop_tools/mavenRepository" />
+        <option name="userSettingsFile" value="/usr/local/develop_tools/apache-maven-3.6.3/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2H4aYqoQyKStM3qur8K1siHSehE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/mallsystem-model/src/main/java/com/wangwei/mall/model" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mallsystem-model/src/main/java/com/wangwei/mall/model" />
+      <recent name="$PROJECT_DIR$/mallsystem-common/mallsystem-common-util/src/main/java/com/wangwei/mall/common" />
+      <recent name="$PROJECT_DIR$/mallsystem-common/mallsystem-service-util/src/main/java/com/wangwei/mall/common" />
+      <recent name="$PROJECT_DIR$/mallsystem-common/mallsystem-common-util/src/main/java/com/wangwei/mall/common/util" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mallsystem-web/mallsystem-web-all/src/main/resources" />
+      <recent name="$PROJECT_DIR$/mallsystem-service/mallsystem-service-product/src/main/resources/mapper" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.MallServiceGatewayApplication">
+    <configuration name="CompletableFutureDemo2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wangwei.mall.item.demo.CompletableFutureDemo2" />
+      <module name="mallsystem-service-item" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wangwei.mall.item.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MallServiceGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="mallsystem-gateway" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wangwei.mall.gateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wangwei.mall.gateway.MallServiceGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MallServiceItemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="mallsystem-service-item" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wangwei.mall.item.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wangwei.mall.item.MallServiceItemApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MallServiceProductApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="mallsystem-service-product" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wangwei.mall.product.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wangwei.mall.product.MallServiceProductApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MallServiceWebAllApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="mallsystem-web-all" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.wangwei.mall.web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wangwei.mall.web.MallServiceWebAllApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.MallServiceWebAllApplication" />
+        <item itemvalue="Spring Boot.MallServiceProductApplication" />
+        <item itemvalue="Spring Boot.MallServiceItemApplication" />
+        <item itemvalue="Spring Boot.MallServiceGatewayApplication" />
+        <item itemvalue="Application.CompletableFutureDemo2" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="42d7a9ac-2824-493f-af78-03d36b3a1f19" name="Changes" comment="" />
+      <created>1667546859816</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667546859816</updated>
+      <workItem from="1667546861693" duration="8979000" />
+      <workItem from="1667960332318" duration="606000" />
+      <workItem from="1667960977858" duration="31834000" />
+      <workItem from="1668158767456" duration="1643000" />
+      <workItem from="1668390373838" duration="1200000" />
+      <workItem from="1668670603266" duration="25523000" />
+      <workItem from="1668995658829" duration="7140000" />
+      <workItem from="1669261587285" duration="598000" />
+      <workItem from="1669791192223" duration="417000" />
+      <workItem from="1672799395067" duration="6197000" />
+    </task>
+    <task id="LOCAL-00001" summary="测试提交">
+      <created>1672813096595</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1672813096595</updated>
+    </task>
+    <task id="LOCAL-00002" summary="测试提交">
+      <created>1672814651754</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1672814651754</updated>
+    </task>
+    <task id="LOCAL-00003" summary="测试提交">
+      <created>1672814773168</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1672814773168</updated>
+    </task>
+    <task id="LOCAL-00004" summary="测试提交">
+      <created>1672815824923</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1672815824923</updated>
+    </task>
+    <task id="LOCAL-00005" summary="测试提交">
+      <created>1672816248384</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1672816248384</updated>
+    </task>
+    <task id="LOCAL-00006" summary="测试提交">
+      <created>1672817064283</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1672817064283</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="测试提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试提交" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/mallsystem-service/mallsystem-service-product/src/main/java/com/wangwei/mall/product/api/ProductApiController.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/mallsystem-service/mallsystem-service-product/src/main/java/com/wangwei/mall/product/service/impl/ManagerServiceImpl.java</url>
+          <line>336</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/mallsystem-service/mallsystem-service-product/src/main/java/com/wangwei/mall/product/service/impl/ManagerServiceImpl.java</url>
+          <line>607</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.util.ArrayList" memberName="elementData" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>

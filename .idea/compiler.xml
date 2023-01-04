@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mallsystem-service-item" />
+        <module name="mallsystem-web-all" />
+        <module name="mallsystem-service-product" />
+        <module name="mallsystem-gateway" />
+        <module name="mallsystem-common-util" />
+        <module name="mallsystem-model" />
+        <module name="mallsystem-web-util" />
+        <module name="mallsystem-service-util" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mallsystem-common" options="-parameters" />
+      <module name="mallsystem-common-util" options="-parameters" />
+      <module name="mallsystem-gateway" options="-parameters" />
+      <module name="mallsystem-model" options="-parameters" />
+      <module name="mallsystem-service" options="-parameters" />
+      <module name="mallsystem-service-item" options="-parameters" />
+      <module name="mallsystem-service-product" options="-parameters" />
+      <module name="mallsystem-service-util" options="-parameters" />
+      <module name="mallsystem-web" options="-parameters" />
+      <module name="mallsystem-web-all" options="-parameters" />
+      <module name="mallsystem-web-util" options="-parameters" />
+    </option>
+  </component>
+</project>
