@@ -17,5 +17,5 @@ public interface IItemService {
     @GetMapping("/api/item/{skuId}")
     Result getItem(@PathVariable("skuId") Long skuId);
 
-    //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
+    //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
 }
