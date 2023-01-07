@@ -96,6 +96,16 @@ public class ProductApiController {
         return manageService.getAttrList(skuId);
     }
 
+    /**
+     * 通过品牌Id 集合来查询数据
+     * @param tmId
+     * @return
+     */
+    @GetMapping("inner/getTrademark/{tmId}")
+    public BaseTrademark getTrademark(@PathVariable("tmId")Long tmId){
+        return manageService.getTrademarkByTmId(tmId);
+    }
+
 
     /**
      * 获取全部分类信息
@@ -106,5 +116,7 @@ public class ProductApiController {
         List<JSONObject> list = manageService.getBaseCategoryList();
         return Result.ok(list);
     }
+
+
 
 }

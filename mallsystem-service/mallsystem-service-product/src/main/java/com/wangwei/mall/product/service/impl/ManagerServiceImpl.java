@@ -83,6 +83,9 @@ public class ManagerServiceImpl implements ManagerService {
     @Autowired
     private RedissonClient redissonClient;
 
+    @Autowired
+    private BaseTrademarkMapper baseTrademarkMapper;
+
 
     @Override
     public List<BaseCategory1> getCategory1() {
@@ -606,6 +609,11 @@ public class ManagerServiceImpl implements ManagerService {
 
 
         return list;
+    }
+
+    @Override
+    public BaseTrademark getTrademarkByTmId(Long tmId) {
+        return baseTrademarkMapper.selectById(tmId);
     }
 
 
