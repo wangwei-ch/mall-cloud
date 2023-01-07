@@ -35,6 +35,5 @@ public class ItemController {
         return "item/item";
     }
 
-    //test
 
 }
