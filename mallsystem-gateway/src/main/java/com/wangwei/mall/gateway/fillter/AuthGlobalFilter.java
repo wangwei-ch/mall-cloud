@@ -39,6 +39,7 @@ public class AuthGlobalFilter implements GlobalFilter {
     private String authUrls;
 
 
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 获取到请求对象
