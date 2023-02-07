@@ -3,16 +3,23 @@ package com.wangwei.mall.cart.service.impl;
 import com.wangwei.mall.cart.inner.service.IProductService;
 import com.wangwei.mall.cart.service.CartService;
 import com.wangwei.mall.common.constant.RedisConst;
+import com.wangwei.mall.common.util.DateUtil;
 import com.wangwei.mall.model.cart.CartInfo;
 import com.wangwei.mall.model.product.SkuInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Service
+@SuppressWarnings("all")
 public class CartServiceImpl implements CartService {
 
     @Autowired
@@ -56,6 +63,32 @@ public class CartServiceImpl implements CartService {
         }
         //添加到缓存中
         boundHashOps.put(skuId.toString(), cartInfo);
+    }
+
+    @Override
+    public List<CartInfo> getCartList(String userId, String userTempId) {
+
+        //创建返回结果集
+        List<CartInfo> result = null;
+
+        if (!StringUtils.isEmpty(userId)){
+            BoundHashOperations boundHashOperations = redisTemplate.boundHashOps(getCartKey(userId));
+            result = boundHashOperations.values();
+        }
+
+        if (!StringUtils.isEmpty(userTempId)){
+            BoundHashOperations boundHashOperations = redisTemplate.boundHashOps(getCartKey(userTempId));
+            result = boundHashOperations.values();
+        }
+
+        if (!CollectionUtils.isEmpty(result)){
+            result.sort((o1,o2) -> {
+                //使用时间进行比较
+                return DateUtil.truncatedCompareTo(o2.getUpdateTime(), o1.getUpdateTime(), Calendar.SECOND);
+            });
+        }
+
+        return null;
     }
 
     /**
