@@ -99,8 +99,6 @@ public class AuthGlobalFilter implements GlobalFilter {
                 return out(response, ResultCodeEnum.LOGIN_AUTH);
             }
 
-
-
         }
 
         //判读是否需要认证
@@ -121,11 +119,7 @@ public class AuthGlobalFilter implements GlobalFilter {
                 return response.setComplete();
 
             }
-
-
         }
-
-
 
         //可以访问指定的资源
         //需要，在后台服务处理业务过程中有可能需要用到userId
