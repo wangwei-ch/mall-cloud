@@ -74,6 +74,7 @@ public class AuthGlobalFilter implements GlobalFilter {
             return out(response, ResultCodeEnum.PERMISSION);
 
 
+
         }
         //获取userId
         String userId=this.getUserId(request);
