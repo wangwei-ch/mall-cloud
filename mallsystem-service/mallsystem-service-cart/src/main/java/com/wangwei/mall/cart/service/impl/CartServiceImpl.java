@@ -141,6 +141,17 @@ public class CartServiceImpl implements CartService {
 
     }
 
+    @Override
+    public void checkCart(String userId, Integer isChecked, Long skuId) {
+        String cartKey = this.getCartKey(userId);
+        BoundHashOperations<String, String, CartInfo> boundHashOps = this.redisTemplate.boundHashOps(cartKey);
+        CartInfo cartInfo = boundHashOps.get(skuId.toString());
+        if(null != cartInfo) {
+            cartInfo.setIsChecked(isChecked);
+            boundHashOps.put(skuId.toString(), cartInfo);
+        }
+    }
+
     /**
      * 获取购物车的key
      * @param userId

@@ -59,4 +59,21 @@ public class CartApiController {
         List<CartInfo> cartInfoList = cartService.getCartList(userId, userTempId);
         return Result.ok(cartInfoList);
     }
+
+    //  选中状态
+    @GetMapping("checkCart/{skuId}/{isChecked}")
+    public Result checkCart(@PathVariable Long skuId,
+                            @PathVariable Integer isChecked,
+                            HttpServletRequest request){
+
+        String userId = AuthContextHolder.getUserId(request);
+        //  判断
+        if (StringUtils.isEmpty(userId)){
+            userId = AuthContextHolder.getUserTempId(request);
+        }
+        //  调用服务层方法
+        cartService.checkCart(userId,isChecked,skuId);
+        return Result.ok();
+    }
+
 }
