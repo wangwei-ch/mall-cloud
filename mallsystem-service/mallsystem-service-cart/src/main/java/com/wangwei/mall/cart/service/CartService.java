@@ -17,4 +17,6 @@ public interface CartService {
      * @param skuId
      */
     void checkCart(String userId, Integer isChecked, Long skuId);
+
+    void deleteCart(Long skuId, String userId);
 }

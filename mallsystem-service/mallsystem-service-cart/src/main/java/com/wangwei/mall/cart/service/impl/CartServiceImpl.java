@@ -152,6 +152,15 @@ public class CartServiceImpl implements CartService {
         }
     }
 
+    @Override
+    public void deleteCart(Long skuId, String userId) {
+        BoundHashOperations<String, String, CartInfo> boundHashOps = this.redisTemplate.boundHashOps(this.getCartKey(userId));
+        //  判断购物车中是否有该商品！
+        if (boundHashOps.hasKey(skuId.toString())){
+            boundHashOps.delete(skuId.toString());
+        }
+    }
+
     /**
      * 获取购物车的key
      * @param userId

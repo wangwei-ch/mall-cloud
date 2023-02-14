@@ -6,10 +6,7 @@ import com.wangwei.mall.common.util.AuthContextHolder;
 import com.wangwei.mall.model.cart.CartInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -73,6 +70,26 @@ public class CartApiController {
         }
         //  调用服务层方法
         cartService.checkCart(userId,isChecked,skuId);
+        return Result.ok();
+    }
+
+    /**
+     * 删除
+     *
+     * @param skuId
+     * @param request
+     * @return
+     */
+    @DeleteMapping("deleteCart/{skuId}")
+    public Result deleteCart(@PathVariable("skuId") Long skuId,
+                             HttpServletRequest request) {
+        // 如何获取userId
+        String userId = AuthContextHolder.getUserId(request);
+        if (StringUtils.isEmpty(userId)) {
+            // 获取临时用户Id
+            userId = AuthContextHolder.getUserTempId(request);
+        }
+        cartService.deleteCart(skuId, userId);
         return Result.ok();
     }
 
