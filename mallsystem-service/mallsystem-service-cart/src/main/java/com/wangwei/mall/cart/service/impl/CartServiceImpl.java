@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @SuppressWarnings("all")
@@ -170,5 +171,20 @@ public class CartServiceImpl implements CartService {
         return RedisConst.USER_KEY_PREFIX + userId + RedisConst.USER_CART_KEY_SUFFIX;
     }
 
+    @Override
+    public List<CartInfo> getCartCheckedList(String userId) {
+        //  获取的选中的购物车列表！
+        String cartKey = this.getCartKey(userId);
+        //  获取到购物车集合数据：
+        List<CartInfo>  cartInfoList = this.redisTemplate.opsForHash().values(cartKey);
+        List<CartInfo> cartInfos = cartInfoList.stream().filter(cartInfo -> {
+            //  再次确认一下最新价格
+            cartInfo.setSkuPrice(productService.getSkuPrice(cartInfo.getSkuId()));
+            return cartInfo.getIsChecked().intValue() == 1;
+        }).collect(Collectors.toList());
+
+        //  返回数据
+        return cartInfos;
+    }
 
 }

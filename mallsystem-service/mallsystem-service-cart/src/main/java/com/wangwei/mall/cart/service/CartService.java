@@ -19,4 +19,12 @@ public interface CartService {
     void checkCart(String userId, Integer isChecked, Long skuId);
 
     void deleteCart(Long skuId, String userId);
+
+    /**
+     * 根据用户Id 查询购物车列表
+     *
+     * @param userId
+     * @return
+     */
+    List<CartInfo> getCartCheckedList(String userId);
 }

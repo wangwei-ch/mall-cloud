@@ -93,4 +93,15 @@ public class CartApiController {
         return Result.ok();
     }
 
+
+    /**
+     * 根据用户Id 查询购物车列表
+     *
+     * @param userId
+     * @return
+     */
+    @GetMapping("getCartCheckedList/{userId}")
+    public List<CartInfo> getCartCheckedList(@PathVariable(value = "userId") String userId) {
+        return cartService.getCartCheckedList(userId);
+    }
 }
