@@ -115,7 +115,7 @@
             submitLogin() {
             	/*后台就可以使用UserInfo 对象接收*/
                 login.login(this.user).then(response => {
-                    	debugger
+                    //	debugger
                     if (response.data.code == 200) {
                         //  把token存在cookie中、也可以放在localStorage中
 						//	result.ok(map);
