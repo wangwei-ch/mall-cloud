@@ -8,6 +8,7 @@ import com.wangwei.mall.model.order.OrderInfo;
 import com.wangwei.mall.model.user.UserAddress;
 import com.wangwei.mall.order.inner.service.ICartService;
 import com.wangwei.mall.order.inner.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/order")
+@Slf4j
 public class OrderApiController {
 
 
@@ -41,6 +43,7 @@ public class OrderApiController {
 
         // 获取到用户Id
         String userId = AuthContextHolder.getUserId(request);
+        log.info("用户id为-{}",userId);
 
         List<UserAddress> addressList = userService.findUserAddressListByUserId(userId);
 
