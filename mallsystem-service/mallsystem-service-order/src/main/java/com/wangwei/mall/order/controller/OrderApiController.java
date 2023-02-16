@@ -8,11 +8,10 @@ import com.wangwei.mall.model.order.OrderInfo;
 import com.wangwei.mall.model.user.UserAddress;
 import com.wangwei.mall.order.inner.service.ICartService;
 import com.wangwei.mall.order.inner.service.IUserService;
+import com.wangwei.mall.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -31,6 +30,9 @@ public class OrderApiController {
 
     @Autowired
     private ICartService cartService;
+
+    @Autowired
+    private OrderService orderService;
 
 
     /**
@@ -75,6 +77,23 @@ public class OrderApiController {
         result.put("totalAmount", orderInfo.getTotalAmount());
 
         return Result.ok(result);
+    }
+
+    /**
+     * 提交订单
+     * @param orderInfo
+     * @param request
+     * @return
+     */
+    @PostMapping("auth/submitOrder")
+    public Result submitOrder(@RequestBody OrderInfo orderInfo, HttpServletRequest request){
+        // 获取到用户Id
+        String userId = AuthContextHolder.getUserId(request);
+        orderInfo.setUserId(Long.parseLong(userId));
+
+        // 验证通过，保存订单！
+        Long orderId = orderService.saveOrderInfo(orderInfo);
+        return Result.ok(orderId);
     }
 
 }
