@@ -1,6 +1,7 @@
 package com.wangwei.mall.order.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wangwei.mall.common.util.HttpClientUtil;
 import com.wangwei.mall.model.enums.OrderStatus;
 import com.wangwei.mall.model.enums.ProcessStatus;
 import com.wangwei.mall.model.order.OrderDetail;
@@ -9,6 +10,7 @@ import com.wangwei.mall.order.mapper.OrderDetailMapper;
 import com.wangwei.mall.order.mapper.OrderInfoMapper;
 import com.wangwei.mall.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+
+    @Value("${ware.url}")
+    private String WARE_URL;
 
 
     @Override
@@ -95,6 +101,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
         String tradeNoKey = "user:" + userId + ":tradeCode";
         // 删除数据
         redisTemplate.delete(tradeNoKey);
+    }
+
+    @Override
+    public boolean checkStock(Long skuId, Integer skuNum) {
+        String result = HttpClientUtil.doGet(WARE_URL + "/hasStock?skuId=" + skuId + "&num=" + skuNum);
+        return "1".equals(result);
     }
 
 

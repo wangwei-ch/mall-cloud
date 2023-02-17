@@ -1,5 +1,6 @@
 package com.wangwei.mall.order.controller;
 
+import com.wangwei.mall.common.constant.RedisConst;
 import com.wangwei.mall.common.result.Result;
 import com.wangwei.mall.common.util.AuthContextHolder;
 import com.wangwei.mall.model.cart.CartInfo;
@@ -7,13 +8,16 @@ import com.wangwei.mall.model.order.OrderDetail;
 import com.wangwei.mall.model.order.OrderInfo;
 import com.wangwei.mall.model.user.UserAddress;
 import com.wangwei.mall.order.inner.service.ICartService;
+import com.wangwei.mall.order.inner.service.IProductService;
 import com.wangwei.mall.order.inner.service.IUserService;
 import com.wangwei.mall.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +38,11 @@ public class OrderApiController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private IProductService productService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 确认订单
@@ -106,6 +115,27 @@ public class OrderApiController {
         }
         //  删除流水号
         orderService.deleteTradeNo(userId);
+
+        //验库存
+        List<OrderDetail> orderDetailList = orderInfo.getOrderDetailList();
+        for (OrderDetail orderDetail : orderDetailList) {
+            boolean result = orderService.checkStock(orderDetail.getSkuId(), orderDetail.getSkuNum());
+            if (!result) {
+                return Result.fail().message(orderDetail.getSkuName() + "库存不足！");
+            }
+
+            // 验证价格：
+            BigDecimal skuPrice = productService.getSkuPrice(orderDetail.getSkuId());
+
+            if (orderDetail.getOrderPrice().compareTo(skuPrice) != 0) {
+                List<CartInfo> cartInfoList = cartService.getCartCheckedList(userId);
+                cartInfoList.forEach(cartInfo -> {
+                    redisTemplate.opsForHash().put(RedisConst.USER_KEY_PREFIX + userId + RedisConst.USER_CART_KEY_SUFFIX, cartInfo.getSkuId().toString(), cartInfo);
+                });
+                return Result.fail().message(orderDetail.getSkuName() + "价格有变动！");
+            }
+        }
+
         // 验证通过，保存订单！
         Long orderId = orderService.saveOrderInfo(orderInfo);
         return Result.ok(orderId);
