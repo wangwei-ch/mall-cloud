@@ -32,7 +32,7 @@ public class RabbitService {
 
 
     /**
-     *
+     * 发送延迟消息
      * @param exchange
      * @param routingKey
      * @param message
@@ -52,6 +52,9 @@ public class RabbitService {
 
         return  true;
     }
+
+
+
 
 }
 

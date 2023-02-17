@@ -3,6 +3,8 @@ package com.wangwei.mall.order.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wangwei.mall.common.constant.MqConst;
+import com.wangwei.mall.common.service.RabbitService;
 import com.wangwei.mall.common.util.HttpClientUtil;
 import com.wangwei.mall.model.enums.OrderStatus;
 import com.wangwei.mall.model.enums.ProcessStatus;
@@ -32,6 +34,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private RabbitService rabbitService;
 
 
     @Value("${ware.url}")
@@ -75,6 +80,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
             orderDetail.setOrderId(orderInfo.getId());
             orderDetailMapper.insert(orderDetail);
         }
+
+        //发送延迟队列，如果定时未支付，取消订单
+        rabbitService.sendDelayMessage(MqConst.EXCHANGE_DIRECT_ORDER_CANCEL, MqConst.ROUTING_ORDER_CANCEL, orderInfo.getId(), MqConst.DELAY_TIME);
+
         return orderInfo.getId();
 
     }
@@ -120,6 +129,22 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
         });
         return page;
 
+    }
+
+    @Override
+    public void execExpiredOrder(Long orderId) {
+// orderInfo
+        updateOrderStatus(orderId, ProcessStatus.CLOSED);
+    }
+
+    @Override
+    public void updateOrderStatus(Long orderId, ProcessStatus processStatus) {
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setId(orderId);
+        orderInfo.setProcessStatus(processStatus.name());
+        orderInfo.setOrderStatus(processStatus.getOrderStatus().name());
+
+        orderInfoMapper.updateById(orderInfo);
     }
 
 }

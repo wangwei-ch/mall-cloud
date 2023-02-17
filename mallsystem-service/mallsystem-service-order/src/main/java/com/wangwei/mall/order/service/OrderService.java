@@ -2,9 +2,16 @@ package com.wangwei.mall.order.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wangwei.mall.model.enums.ProcessStatus;
 import com.wangwei.mall.model.order.OrderInfo;
+import com.wangwei.mall.order.mapper.OrderInfoMapper;
 
-public interface OrderService {
+public interface OrderService extends IService<OrderInfo> {
+
+
+
     Long saveOrderInfo(OrderInfo orderInfo);
 
 
@@ -40,4 +47,18 @@ public interface OrderService {
 
 
     IPage<OrderInfo> getPage(Page<OrderInfo> pageParam, String userId);
+
+    /**
+     * 处理过期订单
+     * @param orderId
+     */
+    void execExpiredOrder(Long orderId);
+
+
+    /**
+     * 根据订单Id 修改订单的状态
+     * @param orderId
+     * @param processStatus
+     */
+    void updateOrderStatus(Long orderId, ProcessStatus processStatus);
 }

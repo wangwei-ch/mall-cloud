@@ -11,6 +11,14 @@
 
     <artifactId>mallsystem-service-order</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.wangwei.mall</groupId>
+            <artifactId>mallsystem-rabbit-util</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
