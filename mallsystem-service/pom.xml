@@ -18,6 +18,7 @@
         <module>mallsystem-service-user</module>
         <module>mallsystem-service-cart</module>
         <module>mallsystem-service-order</module>
+        <module>mallsystem-service-mq</module>
     </modules>
 
 
