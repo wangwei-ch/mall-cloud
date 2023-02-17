@@ -1,5 +1,6 @@
 package com.wangwei.mall.order.controller;
 
+import com.alibaba.nacos.common.utils.StringUtils;
 import com.wangwei.mall.common.constant.RedisConst;
 import com.wangwei.mall.common.result.Result;
 import com.wangwei.mall.common.util.AuthContextHolder;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ThreadPoolExecutor;
 
 @RestController
 @RequestMapping("api/order")
@@ -43,6 +46,9 @@ public class OrderApiController {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private ThreadPoolExecutor threadPoolExecutor;
 
     /**
      * 确认订单
@@ -116,24 +122,51 @@ public class OrderApiController {
         //  删除流水号
         orderService.deleteTradeNo(userId);
 
+        /**
+         * 使用异步编排形式减少请求时间
+         */
+
+        List<String> errorList = new ArrayList<>();
+        List<CompletableFuture> futureList = new ArrayList<>();
+
+
+
         //验库存
         List<OrderDetail> orderDetailList = orderInfo.getOrderDetailList();
         for (OrderDetail orderDetail : orderDetailList) {
-            boolean result = orderService.checkStock(orderDetail.getSkuId(), orderDetail.getSkuNum());
-            if (!result) {
-                return Result.fail().message(orderDetail.getSkuName() + "库存不足！");
-            }
 
-            // 验证价格：
-            BigDecimal skuPrice = productService.getSkuPrice(orderDetail.getSkuId());
+            CompletableFuture<Void> checkStockCompletableFuture =
+                    CompletableFuture.runAsync(() ->{
+                boolean result = orderService.checkStock(orderDetail.getSkuId(), orderDetail.getSkuNum());
+                if (!result) {
+//                    return Result.fail().message(orderDetail.getSkuName() + "库存不足！");
+                    errorList.add(orderDetail.getSkuName() + "库存不足!");
+                }
+            },threadPoolExecutor);
+            futureList.add(checkStockCompletableFuture);
 
-            if (orderDetail.getOrderPrice().compareTo(skuPrice) != 0) {
-                List<CartInfo> cartInfoList = cartService.getCartCheckedList(userId);
-                cartInfoList.forEach(cartInfo -> {
-                    redisTemplate.opsForHash().put(RedisConst.USER_KEY_PREFIX + userId + RedisConst.USER_CART_KEY_SUFFIX, cartInfo.getSkuId().toString(), cartInfo);
-                });
-                return Result.fail().message(orderDetail.getSkuName() + "价格有变动！");
-            }
+
+            CompletableFuture<Void> checkPriceCompletableFuture =
+                    CompletableFuture.runAsync(() -> {
+                // 验证价格：
+                BigDecimal skuPrice = productService.getSkuPrice(orderDetail.getSkuId());
+                if (orderDetail.getOrderPrice().compareTo(skuPrice) != 0) {
+                    List<CartInfo> cartInfoList = cartService.getCartCheckedList(userId);
+                    cartInfoList.forEach(cartInfo -> {
+                        redisTemplate.opsForHash().put(RedisConst.USER_KEY_PREFIX + userId + RedisConst.USER_CART_KEY_SUFFIX, cartInfo.getSkuId().toString(), cartInfo);
+                    });
+                    errorList.add(orderDetail.getSkuName() + "价格有变动！");
+//                    return Result.fail().message(orderDetail.getSkuName() + "价格有变动！");
+                }
+            },threadPoolExecutor);
+            futureList.add(checkPriceCompletableFuture);
+
+        }
+
+        CompletableFuture.allOf(futureList.toArray(new CompletableFuture[futureList.size()])).join();
+
+        if(errorList.size() > 0) {
+            return Result.fail().message(StringUtils.join(errorList, ","));
         }
 
         // 验证通过，保存订单！
