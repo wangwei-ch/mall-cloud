@@ -9,13 +9,11 @@ import com.wangwei.mall.order.mapper.OrderDetailMapper;
 import com.wangwei.mall.order.mapper.OrderInfoMapper;
 import com.wangwei.mall.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> implements OrderService {
@@ -28,6 +26,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
     @Override
@@ -71,6 +71,31 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
 
     }
 
+    @Override
+    public String getTradeNo(String userId) {
+        // 定义key
+        String tradeNoKey = "user:" + userId + ":tradeCode";
+        // 定义一个流水号
+        String tradeNo = UUID.randomUUID().toString().replace("-", "");
+        redisTemplate.opsForValue().set(tradeNoKey, tradeNo);
+        return tradeNo;
+    }
+
+    @Override
+    public boolean checkTradeCode(String userId, String tradeCodeNo) {
+        // 定义key
+        String tradeNoKey = "user:" + userId + ":tradeCode";
+        String redisTradeNo = (String) redisTemplate.opsForValue().get(tradeNoKey);
+        return tradeCodeNo.equals(redisTradeNo);
+    }
+
+    @Override
+    public void deleteTradeNo(String userId) {
+        // 定义key
+        String tradeNoKey = "user:" + userId + ":tradeCode";
+        // 删除数据
+        redisTemplate.delete(tradeNoKey);
+    }
 
 
 }

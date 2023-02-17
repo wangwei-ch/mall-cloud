@@ -69,6 +69,8 @@ public class OrderApiController {
         orderInfo.setOrderDetailList(detailArrayList);
         orderInfo.sumTotalAmount();
 
+        // 获取流水号
+        String tradeNo = orderService.getTradeNo(userId);
         Map<String, Object> result = new HashMap<>();
         result.put("userAddressList", addressList);
         result.put("detailArrayList", detailArrayList);
@@ -76,6 +78,7 @@ public class OrderApiController {
         result.put("totalNum", detailArrayList.size());
         result.put("totalAmount", orderInfo.getTotalAmount());
 
+        result.put("tradeNo", tradeNo);
         return Result.ok(result);
     }
 
@@ -91,6 +94,18 @@ public class OrderApiController {
         String userId = AuthContextHolder.getUserId(request);
         orderInfo.setUserId(Long.parseLong(userId));
 
+
+        // 获取前台页面的流水号
+        String tradeNo = request.getParameter("tradeNo");
+
+        // 调用服务层的比较方法
+        boolean flag = orderService.checkTradeCode(userId, tradeNo);
+        if (!flag) {
+            // 比较失败！
+            return Result.fail().message("不能重复提交订单！");
+        }
+        //  删除流水号
+        orderService.deleteTradeNo(userId);
         // 验证通过，保存订单！
         Long orderId = orderService.saveOrderInfo(orderInfo);
         return Result.ok(orderId);
