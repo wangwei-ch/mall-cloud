@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wangwei.mall.common.cache.MallCache;
+import com.wangwei.mall.common.constant.MqConst;
 import com.wangwei.mall.common.constant.RedisConst;
+import com.wangwei.mall.common.service.RabbitService;
 import com.wangwei.mall.model.product.*;
 import com.wangwei.mall.product.mapper.*;
 import com.wangwei.mall.product.service.ManagerService;
@@ -85,6 +87,9 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Autowired
     private BaseTrademarkMapper baseTrademarkMapper;
+
+    @Autowired
+    private RabbitService rabbitService;
 
 
     @Override
@@ -268,6 +273,9 @@ public class ManagerServiceImpl implements ManagerService {
         skuInfoUp.setId(skuId);
         skuInfoUp.setIsSale(1);
         skuInfoMapper.updateById(skuInfoUp);
+
+        //商品上架
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_GOODS,MqConst.ROUTING_GOODS_UPPER, skuId);
     }
 
     @Override
@@ -278,6 +286,9 @@ public class ManagerServiceImpl implements ManagerService {
         skuInfoUp.setId(skuId);
         skuInfoUp.setIsSale(0);
         skuInfoMapper.updateById(skuInfoUp);
+
+        //商品下架
+        rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_GOODS, MqConst.ROUTING_GOODS_LOWER, skuId);
     }
 
     @MallCache(prefix = RedisConst.SKUKEY_PREFIX)

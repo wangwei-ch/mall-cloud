@@ -22,6 +22,11 @@
             <artifactId>minio</artifactId>
             <version>8.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.wangwei.mall</groupId>
+            <artifactId>mallsystem-rabbit-util</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 
