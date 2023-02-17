@@ -17,6 +17,7 @@
         <module>mallsystem-common-util</module>
         <module>mallsystem-service-util</module>
         <module>mallsystem-web-util</module>
+        <module>mallsystem-rabbit-util</module>
     </modules>
 
     <dependencies>
