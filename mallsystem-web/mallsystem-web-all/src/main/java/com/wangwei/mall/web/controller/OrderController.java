@@ -27,4 +27,13 @@ public class OrderController {
         model.addAllAttributes(result.getData());
         return "order/trade";
     }
+
+    /**
+     * 我的订单
+     * @return
+     */
+    @GetMapping("myOrder.html")
+    public String myOrder() {
+        return "order/myOrder";
+    }
 }

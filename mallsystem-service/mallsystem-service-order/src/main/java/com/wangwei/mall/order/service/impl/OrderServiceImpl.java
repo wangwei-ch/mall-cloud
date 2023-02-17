@@ -1,5 +1,7 @@
 package com.wangwei.mall.order.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangwei.mall.common.util.HttpClientUtil;
 import com.wangwei.mall.model.enums.OrderStatus;
@@ -109,5 +111,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> im
         return "1".equals(result);
     }
 
+
+    @Override
+    public IPage<OrderInfo> getPage(Page<OrderInfo> pageParam, String userId) {
+        IPage<OrderInfo> page = orderInfoMapper.selectPageByUserId(pageParam, userId);
+        page.getRecords().stream().forEach(item -> {
+            item.setOrderStatusName(OrderStatus.getStatusNameByStatus(item.getOrderStatus()));
+        });
+        return page;
+
+    }
 
 }

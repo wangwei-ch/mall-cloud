@@ -1,5 +1,7 @@
 package com.wangwei.mall.order.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wangwei.mall.model.order.OrderInfo;
 
 public interface OrderService {
@@ -35,4 +37,7 @@ public interface OrderService {
      * @return
      */
     boolean checkStock(Long skuId, Integer skuNum);
+
+
+    IPage<OrderInfo> getPage(Page<OrderInfo> pageParam, String userId);
 }

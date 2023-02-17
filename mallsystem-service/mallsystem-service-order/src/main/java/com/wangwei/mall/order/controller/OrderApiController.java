@@ -1,6 +1,8 @@
 package com.wangwei.mall.order.controller;
 
 import com.alibaba.nacos.common.utils.StringUtils;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wangwei.mall.common.constant.RedisConst;
 import com.wangwei.mall.common.result.Result;
 import com.wangwei.mall.common.util.AuthContextHolder;
@@ -12,6 +14,8 @@ import com.wangwei.mall.order.inner.service.ICartService;
 import com.wangwei.mall.order.inner.service.IProductService;
 import com.wangwei.mall.order.inner.service.IUserService;
 import com.wangwei.mall.order.service.OrderService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -172,6 +176,23 @@ public class OrderApiController {
         // 验证通过，保存订单！
         Long orderId = orderService.saveOrderInfo(orderInfo);
         return Result.ok(orderId);
+    }
+
+
+    @ApiOperation("我的订单")
+    @GetMapping("auth/{page}/{limit}")
+    public Result<IPage<OrderInfo>> index(
+            @ApiParam(name = "page", value = "当前页码", required = true)
+            @PathVariable Long page,
+            @ApiParam(name = "limit", value = "每页记录数", required = true)
+            @PathVariable Long limit,
+            HttpServletRequest request) {
+        // 获取到用户Id
+        String userId = AuthContextHolder.getUserId(request);
+
+        Page<OrderInfo> pageParam = new Page<>(page, limit);
+        IPage<OrderInfo> pageModel = orderService.getPage(pageParam, userId);
+        return Result.ok(pageModel);
     }
 
 }
