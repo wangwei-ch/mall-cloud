@@ -19,6 +19,7 @@
         <module>mallsystem-service-cart</module>
         <module>mallsystem-service-order</module>
         <module>mallsystem-service-mq</module>
+        <module>mallsystem-service-payment</module>
     </modules>
 
 
