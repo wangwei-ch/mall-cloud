@@ -35,6 +35,7 @@ public class PaymentServiceImpl implements PaymentService {
         paymentInfo.setCreateTime(new Date());
         paymentInfo.setOrderId(orderInfo.getId());
         paymentInfo.setPaymentType(paymentType);
+        paymentInfo.setUserId(orderInfo.getUserId());
         paymentInfo.setOutTradeNo(orderInfo.getOutTradeNo());
         paymentInfo.setPaymentStatus(PaymentStatus.UNPAID.name());
         paymentInfo.setSubject(orderInfo.getTradeBody());

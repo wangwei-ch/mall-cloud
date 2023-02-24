@@ -52,7 +52,7 @@ public class AlipayController {
      * 支付宝回调
      * @return
      */
-    @RequestMapping("callback/return")
+    @GetMapping("callback/return")
     public String callBack() {
         // 同步回调给用户展示信息
         return "redirect:" + AlipayConfig.return_order_url;
