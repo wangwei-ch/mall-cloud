@@ -195,4 +195,15 @@ public class OrderApiController {
         return Result.ok(pageModel);
     }
 
+
+    /**
+     * 内部调用获取订单
+     * @param orderId
+     * @return
+     */
+    @GetMapping("inner/getOrderInfo/{orderId}")
+    public OrderInfo getOrderInfo(@PathVariable(value = "orderId") Long orderId){
+        return orderService.getOrderInfo(orderId);
+    }
+
 }
