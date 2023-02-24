@@ -28,5 +28,13 @@ public class PaymentController {
         return "payment/pay";
     }
 
+    /**
+     * 支付成功页
+     * @return
+     */
+    @GetMapping("pay/success.html")
+    public String success() {
+        return "payment/success";
+    }
 
 }
