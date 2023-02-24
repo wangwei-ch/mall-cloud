@@ -1,6 +1,7 @@
 package com.wangwei.mall.web.inner.fallback;
 
 import com.wangwei.mall.common.result.Result;
+import com.wangwei.mall.model.order.OrderInfo;
 import com.wangwei.mall.web.inner.service.IOrderService;
 import org.springframework.stereotype.Component;
 
@@ -12,5 +13,10 @@ public class IOrderDegradeService implements IOrderService {
     @Override
     public Result<Map<String, Object>> trade() {
         return Result.fail();
+    }
+
+    @Override
+    public OrderInfo getOrderInfo(Long orderId) {
+        return null;
     }
 }
