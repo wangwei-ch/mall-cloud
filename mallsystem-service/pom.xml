@@ -21,6 +21,7 @@
         <module>mallsystem-service-mq</module>
         <module>mallsystem-service-payment</module>
         <module>mallsystem-service-activity</module>
+        <module>mallsystem-service-task</module>
     </modules>
 
 
