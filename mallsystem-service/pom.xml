@@ -20,6 +20,7 @@
         <module>mallsystem-service-order</module>
         <module>mallsystem-service-mq</module>
         <module>mallsystem-service-payment</module>
+        <module>mallsystem-service-activity</module>
     </modules>
 
 

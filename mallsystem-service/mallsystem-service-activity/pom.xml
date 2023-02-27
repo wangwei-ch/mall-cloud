@@ -9,25 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mallsystem-service-payment</artifactId>
-
-    <build>
-        <finalName>service-payment</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+    <artifactId>mallsystem-service-activity</artifactId>
 
     <dependencies>
-        <!--导入支付宝支付sdk-->
-        <dependency>
-            <groupId>com.alipay.sdk</groupId>
-            <artifactId>alipay-sdk-java</artifactId>
-            <version>4.8.73.ALL</version>
-        </dependency>
         <dependency>
             <groupId>com.wangwei.mall</groupId>
             <artifactId>mallsystem-rabbit-util</artifactId>
